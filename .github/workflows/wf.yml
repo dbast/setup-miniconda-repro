@@ -1,0 +1,66 @@
+name: repro
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-w-miniconda-v2:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: test-env
+          auto-update-conda: true
+          conda-solver: libmamba
+      - name: windows test
+        shell: cmd /C CALL {0}
+        run: >-
+          conda info && conda list && set
+
+  test-w-miniconda-v3:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: test-env
+          auto-update-conda: true
+          conda-solver: libmamba
+      - name: windows test
+        shell: cmd /C CALL {0}
+        run: >-
+          conda info && conda list && set
+
+  test-w-miniforge-v2:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: test-env
+          miniforge-version: latest
+          auto-update-conda: true
+          conda-solver: libmamba
+      - name: windows test
+        shell: cmd /C CALL {0}
+        run: >-
+          conda info && conda list && set
+
+  test-w-miniforge-v3:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: test-env
+          miniforge-version: latest
+          auto-update-conda: true
+          conda-solver: libmamba
+      - name: windows test
+        shell: cmd /C CALL {0}
+        run: >-
+          conda info && conda list && set
