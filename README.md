@@ -1,2 +1,1 @@
 # setup-miniconda-repro
-test
